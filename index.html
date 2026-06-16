@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Broken Arrow 23K — Race Day Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,800;1,400&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --stone:    #1a1714;
+      --rock:     #2d2926;
+      --slate:    #3d3831;
+      --dust:     #8a7f74;
+      --snow:     #f5f0ea;
+      --orange:   #e8611a;
+      --amber:    #f0a500;
+      --ice:      #a8c8d8;
+      --green:    #4caf82;
+      --blue:     #5b9bd5;
+    }
+
+    body {
+      background: var(--stone);
+      color: var(--snow);
+      font-family: 'Barlow', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(170deg, #0d0b09 0%, #2a1f14 60%, #3d2910 100%);
+      padding: 56px 24px 40px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(232,97,26,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(58px, 14vw, 100px);
+      font-weight: 800;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      color: var(--snow);
+    }
+    .hero-title span { color: var(--orange); display: block; }
+    .hero-sub {
+      margin-top: 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--dust);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── ELEV STRIP ── */
+    .elev-strip {
+      background: var(--rock);
+      border-top: 1px solid #3a342d;
+      border-bottom: 1px solid #3a342d;
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+    }
+    .elev-item {
+      padding: 16px 20px;
+      text-align: center;
+      border-right: 1px solid #3a342d;
+      flex: 1;
+      min-width: 90px;
+    }
+    .elev-item:last-child { border-right: none; }
+    .elev-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .elev-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dust);
+      margin-top: 4px;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--stone);
+      border-bottom: 1px solid #3a342d;
+      display: flex;
+      justify-content: center;
+    }
+    .nav-inner {
+      display: flex;
+      max-width: 680px;
+      width: 100%;
+    }
+    .nav-tab {
+      flex: 1;
+      padding: 14px 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--dust);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .nav-tab:hover { color: var(--snow); }
+    .nav-tab.active {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+
+    /* ── TAB PANELS ── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    .section { margin-top: 40px; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #3a342d;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--snow);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .section-body {
+      font-size: 14px;
+      color: var(--dust);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    /* ── WAVE TABLE ── */
+    .wave-grid {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .wave-row { display: contents; }
+    .wave-row > * {
+      padding: 10px 14px;
+      border-bottom: 1px solid #2a2520;
+      font-size: 14px;
+    }
+    .wave-row:last-child > * { border-bottom: none; }
+    .wave-time {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--amber);
+      white-space: nowrap;
+      background: var(--rock);
+    }
+    .wave-name { color: var(--snow); background: var(--rock); }
+    .wave-finish {
+      color: var(--dust);
+      font-size: 13px;
+      text-align: right;
+      white-space: nowrap;
+      background: var(--rock);
+    }
+    .wave-header > * {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dust);
+      background: var(--slate);
+      padding: 8px 14px;
+      border-bottom: 1px solid #3a342d !important;
+    }
+
+    /* ── CARDS ── */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .card {
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .card.full { grid-column: 1 / -1; }
+    .card-key {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dust);
+      margin-bottom: 6px;
+    }
+    .card-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--snow);
+      line-height: 1.2;
+    }
+    .card-note {
+      font-size: 12px;
+      color: var(--dust);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* ── AID LIST ── */
+    .aid-list {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .aid-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid #2a2520;
+      background: var(--rock);
+    }
+    .aid-row:last-child { border-bottom: none; }
+    .aid-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .aid-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--snow);
+    }
+    .aid-detail { font-size: 12px; color: var(--dust); margin-top: 2px; }
+
+    /* ── ALERTS ── */
+    .alert {
+      background: rgba(232,97,26,0.1);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 6px 6px 0;
+      padding: 14px 16px;
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--snow);
+      line-height: 1.5;
+    }
+    .alert strong { color: var(--orange); }
+    .alert.green {
+      background: rgba(76,175,130,0.1);
+      border-left-color: var(--green);
+    }
+    .alert.green strong { color: var(--green); }
+    .alert.blue {
+      background: rgba(91,155,213,0.1);
+      border-left-color: var(--blue);
+    }
+    .alert.blue strong { color: var(--blue); }
+
+    /* ── LINKS ── */
+    .link-block { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .race-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: var(--snow);
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .race-link:hover { border-color: var(--orange); background: #2d2318; }
+    .race-link-icon { font-size: 20px; flex-shrink: 0; }
+    .race-link-body { flex: 1; }
+    .race-link-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--snow);
+    }
+    .race-link-url { font-size: 12px; color: var(--dust); margin-top: 2px; }
+    .race-link-arrow { color: var(--orange); font-size: 18px; }
+
+    /* ── CHECKLIST ── */
+    .checklist { display: flex; flex-direction: column; gap: 6px; }
+    .check-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--snow);
+      line-height: 1.5;
+    }
+    .check-item::before {
+      content: '◆';
+      color: var(--orange);
+      font-size: 8px;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    /* ── WEATHER ── */
+    .weather-bar {
+      display: flex;
+      gap: 10px;
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 16px;
+      align-items: center;
+    }
+    .weather-icon { font-size: 32px; }
+    .weather-main {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--snow);
+    }
+    .weather-detail { font-size: 13px; color: var(--dust); margin-top: 2px; }
+
+    /* ── NUTRITION TABLE ── */
+    .fuel-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      overflow: hidden;
+      font-size: 14px;
+    }
+    .fuel-table th {
+      background: var(--slate);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dust);
+      padding: 9px 14px;
+      text-align: left;
+      border-bottom: 1px solid #3a342d;
+    }
+    .fuel-table td {
+      background: var(--rock);
+      padding: 11px 14px;
+      border-bottom: 1px solid #2a2520;
+      vertical-align: top;
+      color: var(--snow);
+    }
+    .fuel-table tr:last-child td { border-bottom: none; }
+    .fuel-table td:first-child {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--amber);
+      white-space: nowrap;
+      width: 90px;
+    }
+    .fuel-action { font-weight: 500; }
+    .fuel-note { font-size: 12px; color: var(--dust); margin-top: 3px; }
+    .fuel-highlight td:first-child { color: var(--orange); }
+
+    /* ── SNACK GRID ── */
+    .snack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .snack-card {
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 14px;
+    }
+    .snack-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--snow);
+      margin-bottom: 4px;
+    }
+    .snack-why { font-size: 12px; color: var(--dust); line-height: 1.4; }
+    .snack-avoid {
+      background: rgba(232,97,26,0.06);
+      border-color: rgba(232,97,26,0.25);
+    }
+    .snack-avoid .snack-name { color: var(--dust); }
+
+    /* ── HOTEL SPECIFIC ── */
+    .hotel-header {
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .hotel-icon { font-size: 36px; flex-shrink: 0; }
+    .hotel-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--snow);
+      line-height: 1.1;
+    }
+    .hotel-sub { font-size: 13px; color: var(--dust); margin-top: 4px; }
+    .hotel-conf {
+      margin-top: 8px;
+      display: inline-block;
+      background: rgba(76,175,130,0.15);
+      border: 1px solid rgba(76,175,130,0.3);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.06em;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .timeline-row {
+      display: flex;
+      align-items: stretch;
+      border-bottom: 1px solid #2a2520;
+      background: var(--rock);
+    }
+    .timeline-row:last-child { border-bottom: none; }
+    .timeline-date {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--amber);
+      padding: 14px 16px;
+      min-width: 100px;
+      border-right: 1px solid #2a2520;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .timeline-date span {
+      font-size: 10px;
+      color: var(--dust);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .timeline-info {
+      padding: 14px 16px;
+      flex: 1;
+    }
+    .timeline-event {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--snow);
+    }
+    .timeline-detail { font-size: 12px; color: var(--dust); margin-top: 3px; }
+
+    .amenity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .amenity-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--snow);
+    }
+    .amenity-icon { font-size: 16px; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    .footer {
+      margin-top: 48px;
+      padding: 24px 16px;
+      text-align: center;
+      border-top: 1px solid #2a2520;
+      color: var(--dust);
+      font-size: 12px;
+    }
+    .footer a { color: var(--orange); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      .cards { grid-template-columns: 1fr; }
+      .card.full { grid-column: 1; }
+      .snack-grid { grid-template-columns: 1fr; }
+      .amenity-grid { grid-template-columns: 1fr; }
+      .nav-tab { font-size: 10px; padding: 12px 4px; letter-spacing: 0.04em; }
+      .timeline-date { min-width: 80px; font-size: 12px; padding: 12px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Broken Arrow Skyrace · Palisades Tahoe</div>
+  <div class="hero-title">23<span>K</span></div>
+  <div class="hero-sub">Sunday, June 21, 2026 &nbsp;·&nbsp; Race Day Guide</div>
+</div>
+
+<!-- ELEV STRIP -->
+<div class="elev-strip">
+  <div class="elev-item">
+    <div class="elev-val">14.25</div>
+    <div class="elev-label">Miles</div>
+  </div>
+  <div class="elev-item">
+    <div class="elev-val">22.9</div>
+    <div class="elev-label">Kilometers</div>
+  </div>
+  <div class="elev-item">
+    <div class="elev-val">4,500′</div>
+    <div class="elev-label">Vert Gain</div>
+  </div>
+  <div class="elev-item">
+    <div class="elev-val">7 hr</div>
+    <div class="elev-label">Cut-off</div>
+  </div>
+  <div class="elev-item">
+    <div class="elev-val">6,200′</div>
+    <div class="elev-label">Start Elev.</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="switchTab('race', this)">🏁 Race Info</button>
+    <button class="nav-tab" onclick="switchTab('fuel', this)">⚡ Fuel & Salt</button>
+    <button class="nav-tab" onclick="switchTab('hotel', this)">🏨 Hotel</button>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════ TAB 1: RACE INFO ══ -->
+<div id="tab-race" class="tab-panel active">
+  <div class="content">
+
+    <div class="section">
+      <div class="section-label">Race At A Glance</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-key">Start Location</div>
+          <div class="card-val">ACG Arch by Coffeebar</div>
+          <div class="card-note">Palisades Tahoe vendor village</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Flag Color</div>
+          <div class="card-val" style="color:#e8611a;">🟠 Orange</div>
+          <div class="card-note">Follow orange flags on course</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Drop Bags</div>
+          <div class="card-val">None</div>
+          <div class="card-note">Carry everything you need</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Crew Access</div>
+          <div class="card-val">N/A</div>
+          <div class="card-note">No crew access for 23K</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Wave Starts — Sunday, June 21</div>
+      <div class="wave-grid">
+        <div class="wave-row wave-header">
+          <div>Start</div><div>Wave</div><div>Est. Finish</div>
+        </div>
+        <div class="wave-row">
+          <div class="wave-time">8:00 AM</div>
+          <div class="wave-name">Wave 1 — Elite Women (Invite Only)</div>
+          <div class="wave-finish">1:50–2:40</div>
+        </div>
+        <div class="wave-row">
+          <div class="wave-time">8:20 AM</div>
+          <div class="wave-name">Wave 2 — Elite Men (Invite Only)</div>
+          <div class="wave-finish">1:30–2:30</div>
+        </div>
+        <div class="wave-row">
+          <div class="wave-time">8:30 AM</div>
+          <div class="wave-name">Wave 3 — Competitive Age Groupers</div>
+          <div class="wave-finish">2:30–3:15</div>
+        </div>
+        <div class="wave-row">
+          <div class="wave-time">8:40 AM</div>
+          <div class="wave-name">Wave 4 — Nonbinary (Open)</div>
+          <div class="wave-finish">All</div>
+        </div>
+        <div class="wave-row">
+          <div class="wave-time">8:50 AM</div>
+          <div class="wave-name">Wave 5 — Open Wave 1</div>
+          <div class="wave-finish">3:15–3:45</div>
+        </div>
+        <div class="wave-row">
+          <div class="wave-time">9:00 AM</div>
+          <div class="wave-name">Wave 6 — Open Wave 2</div>
+          <div class="wave-finish">3:45–4:30</div>
+        </div>
+        <div class="wave-row">
+          <div class="wave-time">9:10 AM</div>
+          <div class="wave-name">Wave 7 — Open Wave 3</div>
+          <div class="wave-finish">4:30–7:00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Packet Pickup</div>
+      <div class="section-title">Pick up Thursday if you can</div>
+      <div class="cards">
+        <div class="card full">
+          <div class="card-key">Thursday, June 18</div>
+          <div class="card-val">10:00 AM – 6:00 PM</div>
+          <div class="card-note">All-distance pickup. Sunday mornings get crowded fast — Thursday is the move. Bring valid photo ID. Nobody else can pick up your bib.</div>
+        </div>
+      </div>
+      <div class="alert">
+        <strong>ID Required.</strong> Valid photo ID must be presented. Bib pickup by proxy is not allowed.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Aid Stations</div>
+      <div class="section-title">On-course fuel</div>
+      <div class="aid-list">
+        <div class="aid-row">
+          <div class="aid-dot"></div>
+          <div>
+            <div class="aid-name">Neversecond Gels (at all stations)</div>
+            <div class="aid-detail">Citrus · Passion Fruit · Unflavored · Berry (caffeinated, 75mg)</div>
+          </div>
+        </div>
+        <div class="aid-row">
+          <div class="aid-dot"></div>
+          <div>
+            <div class="aid-name">Tailwind Nutrition (at all stations)</div>
+            <div class="aid-detail">Naked · Dauwaltermelon — plus best-in-class real food</div>
+          </div>
+        </div>
+        <div class="aid-row">
+          <div class="aid-dot" style="background:var(--ice)"></div>
+          <div>
+            <div class="aid-name">Full Aid Station List</div>
+            <div class="aid-detail">Locations and mileages on the official race page</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <a class="race-link" href="https://www.brokenarrowskyrace.com/23k" target="_blank">
+          <div class="race-link-icon">📍</div>
+          <div class="race-link-body">
+            <div class="race-link-title">23K Aid Station Details</div>
+            <div class="race-link-url">brokenarrowskyrace.com/23k</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Weather</div>
+      <div class="weather-bar">
+        <div class="weather-icon">⛰️</div>
+        <div>
+          <div class="weather-main">Perfect weekend forecast</div>
+          <div class="weather-detail">Daytime lows in the 70s · Overnight high 40s · Wind always a factor · Summit dramatically colder than the 6,200 ft village</div>
+        </div>
+      </div>
+      <div class="alert">
+        <strong>Dress prepared.</strong> Conditions change fast above treeline. Don't get caught without a layer.
+      </div>
+      <div style="margin-top:10px">
+        <a class="race-link" href="https://weather.com/weather/tenday/l/Olympic+Valley+California+96146" target="_blank">
+          <div class="race-link-icon">🌤️</div>
+          <div class="race-link-body">
+            <div class="race-link-title">Olympic Valley 10-Day Forecast</div>
+            <div class="race-link-url">weather.com</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">At The Finish</div>
+      <div class="section-title">Ring Das Bell 🔔</div>
+      <div class="checklist">
+        <div class="check-item">Free finish line feed station — open to all registered runners</div>
+        <div class="check-item">Catered meal from Men Wielding Fire — food voucher attached to your bib, redeemable any day of race weekend</div>
+        <div class="check-item">Drink voucher on your bib — Alibi + Best Day Brewing at the finish line bar</div>
+        <div class="check-item">Free pre/post-race headshots by Scott Rokis Photography at the Slot Bar</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Key Links</div>
+      <div class="link-block">
+        <a class="race-link" href="https://www.brokenarrowskyrace.com/23k" target="_blank">
+          <div class="race-link-icon">🗺️</div>
+          <div class="race-link-body">
+            <div class="race-link-title">23K Course Map & Race Info</div>
+            <div class="race-link-url">brokenarrowskyrace.com/23k</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+        <a class="race-link" href="https://www.brokenarrowskyrace.com/schedule" target="_blank">
+          <div class="race-link-icon">📅</div>
+          <div class="race-link-body">
+            <div class="race-link-title">Full Weekend Schedule</div>
+            <div class="race-link-url">brokenarrowskyrace.com/schedule</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+        <a class="race-link" href="https://www.brokenarrowskyrace.com/get-the-app" target="_blank">
+          <div class="race-link-icon">📱</div>
+          <div class="race-link-body">
+            <div class="race-link-title">Download the Official Event App</div>
+            <div class="race-link-url">brokenarrowskyrace.com/get-the-app — powered by Endurance HQ</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+        <a class="race-link" href="https://www.brokenarrowskyrace.com/plan-your-trip" target="_blank">
+          <div class="race-link-icon">🏔️</div>
+          <div class="race-link-body">
+            <div class="race-link-title">Plan Your Trip</div>
+            <div class="race-link-url">brokenarrowskyrace.com/plan-your-trip</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Don't Forget</div>
+      <div class="checklist">
+        <div class="check-item">Download the event app — live maps, updates, schedule all weekend</div>
+        <div class="check-item">Pick up bib Thursday June 18, 10am–6pm (bring photo ID)</div>
+        <div class="check-item">No drop bags for the 23K — carry everything from the start</div>
+        <div class="check-item">Follow <strong>orange flags</strong> on course</div>
+        <div class="check-item">Cut-off is 7 hours from your wave start (~29:28/mile min pace)</div>
+        <div class="check-item">Free cowbells at the concierge tent — limited supply daily</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ TAB 2: FUEL & SALT ══ -->
+<div id="tab-fuel" class="tab-panel">
+  <div class="content">
+
+    <div class="section">
+      <div class="section-label">The Core Rule</div>
+      <div class="section-title">Eat and salt before you need it</div>
+      <div class="section-body">You're a cramper who wings it — that's the combo that breaks people on a 4,500ft climb in June heat at altitude. The summit will have you sweating hard before you feel it, and altitude suppresses hunger right when your body needs fuel most. Set a watch timer and execute the plan regardless of how you feel.</div>
+      <div class="alert green">
+        <strong>Key mindset shift:</strong> By the time you feel a cramp or bonk coming, you're already 20–30 minutes behind. Fuel and salt on a schedule, not on symptoms.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Salt / Electrolytes</div>
+      <div class="section-title">Your #1 priority</div>
+      <div class="section-body">The aid stations carry Tailwind (electrolytes in the drink) but don't rely on that alone given your cramping history. Carry your own salt chews as the foundation.</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-key">Hot / Hard effort</div>
+          <div class="card-val">Every 30 min</div>
+          <div class="card-note">If you're sweating hard on the climbs, go every 30. Don't wait.</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Cooler / Easier pace</div>
+          <div class="card-val">Every 45 min</div>
+          <div class="card-note">Minimum interval. Still stick to the schedule.</div>
+        </div>
+        <div class="card full">
+          <div class="card-key">Total to carry</div>
+          <div class="card-val">8–12 chews</div>
+          <div class="card-note">Enough for a 4–6 hour effort. Take one at the start line before you even feel warm.</div>
+        </div>
+      </div>
+      <div class="alert">
+        <strong>Front-load it.</strong> Pop a salt chew at the start line even before you feel warm. The climb starts immediately.
+      </div>
+      <div class="section-body" style="margin-top:16px; font-size:13px;">
+        <strong style="color:var(--snow);">Good products:</strong> SaltStick Chews, Precision Hydration chews, Nuun Sport tablets in your water bottle.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Energy Gummies & Gels</div>
+      <div class="section-title">150–200 cal/hour minimum</div>
+      <div class="section-body">The race provides Neversecond gels at every aid station — use those as bonus fuel, not your primary plan. Carry your own stash so you're never dependent on reaching the next station.</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-key">Frequency</div>
+          <div class="card-val">Every 45–60 min</div>
+          <div class="card-note">Regardless of hunger. Set a timer.</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Target per hour</div>
+          <div class="card-val">150–200 cal</div>
+          <div class="card-note">Roughly 1 gel or a serving of gummies per interval.</div>
+        </div>
+        <div class="card full">
+          <div class="card-key">Carry in your vest</div>
+          <div class="card-val">3–4 gels or 1 bag gummies</div>
+          <div class="card-note">Personal stash. Use aid station gels as a bonus on top.</div>
+        </div>
+      </div>
+      <div class="alert">
+        <strong>Caffeinated gel strategy:</strong> The Berry Neversecond at aid stations has 75mg caffeine. Save it for halfway or a tough climb — not the start.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Real Food Snacks</div>
+      <div class="section-title">What to pack in your vest</div>
+      <div class="section-body">High elevation + sustained effort = your stomach gets picky. Stick to easy-to-digest, not overly sweet, doesn't melt. Test anything new before race day.</div>
+      <div class="snack-grid">
+        <div class="snack-card">
+          <div class="snack-name">🌴 Medjool Dates</div>
+          <div class="snack-why">Fast carbs, easy on the stomach, portable, natural sugars</div>
+        </div>
+        <div class="snack-card">
+          <div class="snack-name">🥜 Mini PB&J Quarters</div>
+          <div class="snack-why">Real food that settles well, fat + carb combo for long efforts</div>
+        </div>
+        <div class="snack-card">
+          <div class="snack-name">🥔 Salted Potato Chips</div>
+          <div class="snack-why">Doubles as salt + carbs — great mid-race reset, easy to eat moving</div>
+        </div>
+        <div class="snack-card">
+          <div class="snack-name">🌾 Bobo's Oat Bar</div>
+          <div class="snack-why">Dense but not too rich, holds together well, real ingredients</div>
+        </div>
+        <div class="snack-card">
+          <div class="snack-name">🍌 Banana Pieces</div>
+          <div class="snack-why">Fast carbs + potassium, easy to digest if you tolerate them</div>
+        </div>
+        <div class="snack-card snack-avoid">
+          <div class="snack-name">❌ Avoid</div>
+          <div class="snack-why">High-fiber, dairy, anything new, heavy protein bars, greasy or spicy</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Race Day Schedule</div>
+      <div class="section-title">Sample plan for a 5-hour effort</div>
+      <div class="section-body">Adjust based on your wave start. Every entry is a non-negotiable checkpoint — execute it even if you don't feel like it.</div>
+      <table class="fuel-table">
+        <thead>
+          <tr><th>Time</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Start</td>
+            <td><div class="fuel-action">1 salt chew + sip of water</div><div class="fuel-note">Before you feel warm. Get ahead of the climb.</div></td>
+          </tr>
+          <tr>
+            <td>~45 min</td>
+            <td><div class="fuel-action">Energy gummies or gel + 1 salt chew</div><div class="fuel-note">You're probably on a climb. Eat anyway.</div></td>
+          </tr>
+          <tr>
+            <td>~1:30</td>
+            <td><div class="fuel-action">Gel + 1 salt chew + real food snack</div><div class="fuel-note">Dates, chips, or PB&J quarter. Mix it up from sweet.</div></td>
+          </tr>
+          <tr>
+            <td>~2:15</td>
+            <td><div class="fuel-action">Aid station — Tailwind + Neversecond gel</div><div class="fuel-note">Top off water. Salt chew if 30–45 min has passed.</div></td>
+          </tr>
+          <tr>
+            <td>~3:00</td>
+            <td><div class="fuel-action">Salt chew + gummies + real food snack</div><div class="fuel-note">You may not feel hungry. Eat anyway — this is where bonks happen.</div></td>
+          </tr>
+          <tr class="fuel-highlight">
+            <td>~3:45</td>
+            <td><div class="fuel-action">Caffeinated gel (Berry, 75mg) if you need a push</div><div class="fuel-note">Best timing — late enough to matter, early enough not to blow up.</div></td>
+          </tr>
+          <tr>
+            <td>~4:30</td>
+            <td><div class="fuel-action">Final aid station — top off everything</div><div class="fuel-note">Water, Tailwind, one more gel. Salt chew. You're close.</div></td>
+          </tr>
+          <tr>
+            <td>Finish 🔔</td>
+            <td><div class="fuel-action">Catered meal + cold beer</div><div class="fuel-note">Food voucher + drink ticket are on your bib.</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Vest Packing List</div>
+      <div class="checklist">
+        <div class="check-item">8–12 salt chews (SaltStick or Precision Hydration)</div>
+        <div class="check-item">3–4 gels or 1 bag of energy gummies (personal stash)</div>
+        <div class="check-item">2–3 real food items: dates, chips, PB&J quarters, or oat bar</div>
+        <div class="check-item">Enough water capacity to reach each aid station</div>
+        <div class="check-item">Watch with timer set to 45-minute intervals</div>
+        <div class="check-item">Extra layer — summit will be colder than you expect</div>
+      </div>
+      <div class="alert" style="margin-top:16px;">
+        <strong>Nothing new on race day.</strong> Test your gels, chews, and snacks on a training run before June 21. GI issues at altitude are brutal.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ TAB 3: HOTEL ══ -->
+<div id="tab-hotel" class="tab-panel">
+  <div class="content">
+
+    <!-- HOTEL HEADER -->
+    <div class="section">
+      <div class="section-label">Your Reservation</div>
+      <div class="hotel-header">
+        <div class="hotel-icon">🏔️</div>
+        <div>
+          <div class="hotel-name">The Village at Palisades Tahoe</div>
+          <div class="hotel-sub">1750 Village East Rd · Olympic Valley, CA 96146</div>
+          <div class="hotel-sub">Standard Two Bedroom Suite with Two Twins · 2 Adults, 4 Children</div>
+          <div class="hotel-conf">✓ CONFIRMED</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECK IN / OUT TIMELINE -->
+    <div class="section">
+      <div class="section-label">Stay Timeline</div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-date">June 19<span>Friday</span></div>
+          <div class="timeline-info">
+            <div class="timeline-event">Check-In from 4:00 PM</div>
+            <div class="timeline-detail">Race day for the Ascent & 18K — you'll be arriving on race day. Pick up your bib at packet pickup (10am–6pm) before heading to the hotel.</div>
+          </div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-date">June 21<span>Sunday</span></div>
+          <div class="timeline-info">
+            <div class="timeline-event">Check-Out by 11:00 AM</div>
+            <div class="timeline-detail">⚠️ Your race starts at 8am+ and checkout is 11am. Make sure your gear is staged before you head to the start line.</div>
+          </div>
+        </div>
+      </div>
+      <div class="alert">
+        <strong>Race morning heads-up.</strong> Checkout is 11am on the same day as your race. Get your bag packed and staged the night before so you're not scrambling post-finish.
+      </div>
+    </div>
+
+    <!-- BOOKING SUMMARY -->
+    <div class="section">
+      <div class="section-label">Booking Summary</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-key">Room Type</div>
+          <div class="card-val" style="font-size:16px;">2BR Suite, Two Twins</div>
+          <div class="card-note">2 adults · 4 children</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Nights</div>
+          <div class="card-val">2 Nights</div>
+          <div class="card-note">June 19–21, 2026</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Total Paid</div>
+          <div class="card-val">$1,690.35</div>
+          <div class="card-note">Paid in full</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Package Savings</div>
+          <div class="card-val" style="color:var(--green);">$278.50</div>
+          <div class="card-note">Group rate through Broken Arrow block</div>
+        </div>
+      </div>
+      <div class="alert green">
+        <strong>Fully paid.</strong> No balance due — your reservation is confirmed and paid in full.
+      </div>
+    </div>
+
+    <!-- RESORT FEE PERKS -->
+    <div class="section">
+      <div class="section-label">What's Included — $48/night Resort Fee</div>
+      <div class="section-title">You're getting a lot</div>
+      <div class="amenity-grid">
+        <div class="amenity-item"><div class="amenity-icon">🚗</div>Heated underground parking (1 vehicle free)</div>
+        <div class="amenity-item"><div class="amenity-icon">📶</div>High-speed WiFi in room</div>
+        <div class="amenity-item"><div class="amenity-icon">☕</div>In-room coffee & tea</div>
+        <div class="amenity-item"><div class="amenity-icon">🛎️</div>24hr front desk & concierge</div>
+        <div class="amenity-item"><div class="amenity-icon">🔥</div>8 hot tubs + 4 saunas</div>
+        <div class="amenity-item"><div class="amenity-icon">💪</div>3 fitness rooms</div>
+        <div class="amenity-item"><div class="amenity-icon">🎮</div>Media room, Xbox, pool table, foosball</div>
+        <div class="amenity-item"><div class="amenity-icon">🧒</div>Children's room on site</div>
+      </div>
+      <div class="alert blue" style="margin-top:12px;">
+        <strong>Second vehicle:</strong> Additional cars are $35/night in the 2nd level indoor garage. No overnight surface lot parking allowed.
+      </div>
+    </div>
+
+    <!-- POLICIES -->
+    <div class="section">
+      <div class="section-label">Key Policies</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-key">Cancellation</div>
+          <div class="card-val" style="font-size:16px; color:var(--orange);">5-day window</div>
+          <div class="card-note">Summer/Fall policy — cancel at least 5 days before arrival or forfeit the full amount. You're inside that window now.</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Pets</div>
+          <div class="card-val" style="font-size:16px;">No pets</div>
+          <div class="card-note">Service animals only.</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Smoking</div>
+          <div class="card-val" style="font-size:16px;">No smoking</div>
+          <div class="card-note">Not in rooms or on balconies — designated areas only.</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Housekeeping</div>
+          <div class="card-val" style="font-size:16px;">Daily + 3rd day</div>
+          <div class="card-note">Daily trash & towel service, full refresh every 3rd day.</div>
+        </div>
+      </div>
+      <div class="alert" style="margin-top: 12px;">
+        <strong>No A/C.</strong> The village has no central air conditioning — portable units available in most rooms. Temps drop to 40–55°F overnight, so cracking a window works well.
+      </div>
+    </div>
+
+    <!-- CONTACT & LINKS -->
+    <div class="section">
+      <div class="section-label">Contact & Useful Links</div>
+      <div class="link-block">
+        <a class="race-link" href="https://www.palisadestahoe.com" target="_blank">
+          <div class="race-link-icon">🌐</div>
+          <div class="race-link-body">
+            <div class="race-link-title">The Village at Palisades Tahoe</div>
+            <div class="race-link-url">palisadestahoe.com · 1-800-403-0206</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+        <a class="race-link" href="https://play.google.com/store/apps/details?id=com.guestexpressapp.palisadestahoe" target="_blank">
+          <div class="race-link-icon">📱</div>
+          <div class="race-link-body">
+            <div class="race-link-title">Download the Village App</div>
+            <div class="race-link-url">Speed up check-in, get room-ready notifications, contactless checkout</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+        <a class="race-link" href="https://www.inntopia.travel/aspnet/09/find_itinerary.aspx" target="_blank">
+          <div class="race-link-icon">📋</div>
+          <div class="race-link-body">
+            <div class="race-link-title">Modify Itinerary Online</div>
+            <div class="race-link-url">Modify your reservation online</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+      </div>
+      <div class="section-body" style="margin-top:16px; font-size:13px;">
+        <strong style="color:var(--snow);">After-hours front desk:</strong> 530-584-6205 &nbsp;·&nbsp;
+        <strong style="color:var(--snow);">Reservations:</strong> villagereservations@palisadestahoe.com
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  Built from your Broken Arrow confirmation email &nbsp;·&nbsp;
+  <a href="https://www.brokenarrowskyrace.com" target="_blank">brokenarrowskyrace.com</a>
+  &nbsp;·&nbsp; Race weekend June 18–21, 2026
+</div>
+
+<script>
+  function switchTab(name, el) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
