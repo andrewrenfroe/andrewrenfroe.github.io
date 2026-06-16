@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Broken Arrow 23K — Race Day Guide</title>
+  <title>Renfroe & Stone — Broken Arrow 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,800;1,400&family=Barlow:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -144,9 +144,48 @@
       border-bottom-color: var(--orange);
     }
 
-    /* ── TAB PANELS ── */
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
+    /* ── MAIN PANELS ── */
+    .main-panel { display: none; }
+    .main-panel.active { display: block; }
+
+    /* ── SUB NAV ── */
+    .sub-nav {
+      background: var(--rock);
+      border-bottom: 1px solid #3a342d;
+      display: flex;
+      justify-content: center;
+    }
+    .sub-nav-inner {
+      display: flex;
+      max-width: 680px;
+      width: 100%;
+    }
+    .sub-tab {
+      flex: 1;
+      padding: 11px 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--dust);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .sub-tab:hover { color: var(--snow); }
+    .sub-tab.active {
+      color: var(--amber);
+      border-bottom-color: var(--amber);
+    }
+
+    /* ── SUB PANELS ── */
+    .sub-panel { display: none; }
+    .sub-panel.active { display: block; }
 
     /* ── CONTENT ── */
     .content {
@@ -543,6 +582,113 @@
     }
     .amenity-icon { font-size: 16px; flex-shrink: 0; }
 
+    /* ── PACK CHECKLIST ── */
+    .pack-box {
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 4px 14px 10px;
+      margin-bottom: 10px;
+    }
+    .pack-category-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--amber);
+      padding: 10px 0 6px;
+      border-bottom: 1px solid #3a342d;
+      margin-bottom: 4px;
+    }
+    .pack-list { display: flex; flex-direction: column; }
+    .pack-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #2a2520;
+      cursor: pointer;
+    }
+    .pack-item:last-child { border-bottom: none; }
+    .pack-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border: 2px solid var(--dust);
+      border-radius: 3px;
+      background: transparent;
+      margin-top: 2px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      position: relative;
+    }
+    .pack-item input[type="checkbox"]:checked {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .pack-item input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      top: -1px;
+      left: 1px;
+      line-height: 14px;
+    }
+    .pack-item label {
+      font-size: 14px;
+      color: var(--snow);
+      line-height: 1.5;
+      cursor: pointer;
+      flex: 1;
+      transition: color 0.15s;
+    }
+    .pack-item.is-checked label {
+      color: var(--dust);
+      text-decoration: line-through;
+    }
+    .pack-note {
+      font-size: 12px;
+      color: var(--dust);
+      margin-top: 2px;
+      display: block;
+    }
+    .pack-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+    }
+    .pack-progress-bar-wrap {
+      flex: 1;
+      height: 6px;
+      background: #3a342d;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .pack-progress-bar {
+      height: 100%;
+      background: var(--green);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    .pack-progress-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--snow);
+      white-space: nowrap;
+    }
+
     /* ── FOOTER ── */
     .footer {
       margin-top: 48px;
@@ -553,6 +699,187 @@
       font-size: 12px;
     }
     .footer a { color: var(--orange); text-decoration: none; }
+
+    /* ── PACK LIST ── */
+    .pack-progress {
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pack-progress-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      color: var(--dust);
+      white-space: nowrap;
+    }
+    .pack-progress-text strong { color: var(--snow); font-size: 16px; }
+    .pack-progress-track {
+      flex: 1;
+      min-width: 80px;
+      background: var(--slate);
+      border-radius: 3px;
+      height: 8px;
+      overflow: hidden;
+    }
+    .pack-progress-fill {
+      background: var(--green);
+      height: 8px;
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .pack-reset-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dust);
+      background: none;
+      border: 1px solid #3a342d;
+      border-radius: 4px;
+      padding: 4px 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .pack-reset-btn:hover { color: var(--snow); border-color: var(--dust); }
+    .pack-print-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dust);
+      background: none;
+      border: 1px solid #3a342d;
+      border-radius: 4px;
+      padding: 4px 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .pack-print-btn:hover { color: var(--snow); border-color: var(--dust); }
+    .pack-section { margin-top: 24px; }
+    .pack-section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #3a342d;
+    }
+    .pack-list {
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .pack-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid #2a2520;
+      background: var(--rock);
+    }
+    .pack-item:last-child { border-bottom: none; }
+    .pack-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      accent-color: var(--green);
+      cursor: pointer;
+    }
+    .pack-item label {
+      font-size: 14px;
+      color: var(--snow);
+      cursor: pointer;
+      flex: 1;
+      line-height: 1.4;
+    }
+    .pack-item.checked label { text-decoration: line-through; color: var(--dust); }
+    .pack-item.custom { border-left: 3px solid var(--blue); }
+    .pack-remove {
+      background: none;
+      border: none;
+      color: var(--dust);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0 2px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .pack-remove:hover { color: var(--orange); }
+    .pack-add-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      padding-bottom: 24px;
+    }
+    .pack-add-input {
+      flex: 1;
+      background: var(--rock);
+      border: 1px solid #3a342d;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      color: var(--snow);
+      outline: none;
+    }
+    .pack-add-input::placeholder { color: var(--dust); }
+    .pack-add-input:focus { border-color: var(--blue); }
+    .pack-add-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--stone);
+      background: var(--blue);
+      border: none;
+      border-radius: 6px;
+      padding: 10px 16px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .pack-add-btn:hover { opacity: 0.85; }
+    .pack-box { margin-top: 20px; }
+    .pack-category-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+    .pack-item > span { font-size: 14px; color: var(--snow); flex: 1; line-height: 1.4; }
+    .pack-item.is-checked > span { text-decoration: line-through; color: var(--dust); }
+    .pack-note { display: block; font-size: 11px; color: var(--dust); margin-top: 2px; }
+
+    @media print {
+      .hero, .nav, .sub-nav, .pack-progress, .pack-add-row,
+      .pack-reset-btn, .pack-print-btn, .footer, .pack-remove { display: none !important; }
+      .main-panel, .sub-panel { display: block !important; }
+      body { background: white; color: black; font-size: 12px; }
+      .pack-item { background: white; border-bottom: 1px solid #ccc; padding: 5px 0; }
+      .pack-item label { color: black; }
+      .pack-item.checked label { color: #999; }
+      .pack-section-label { color: black; border-bottom: 1px solid black; }
+      .pack-list { border: 1px solid #ccc; border-radius: 0; }
+      .pack-section { margin-top: 16px; }
+      .content { padding: 0; }
+    }
 
     @media (max-width: 480px) {
       .cards { grid-template-columns: 1fr; }
@@ -568,46 +895,299 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">Broken Arrow Skyrace · Palisades Tahoe</div>
-  <div class="hero-title">23<span>K</span></div>
-  <div class="hero-sub">Sunday, June 21, 2026 &nbsp;·&nbsp; Race Day Guide</div>
+  <div class="hero-eyebrow">Broken Arrow Skyrace · Palisades Tahoe · June 18–21, 2026</div>
+  <div class="hero-title">Renfroe<span>&amp; Stone</span></div>
+  <div class="hero-sub">Race Day Guide</div>
 </div>
 
-<!-- ELEV STRIP -->
-<div class="elev-strip">
-  <div class="elev-item">
-    <div class="elev-val">14.25</div>
-    <div class="elev-label">Miles</div>
-  </div>
-  <div class="elev-item">
-    <div class="elev-val">22.9</div>
-    <div class="elev-label">Kilometers</div>
-  </div>
-  <div class="elev-item">
-    <div class="elev-val">4,500′</div>
-    <div class="elev-label">Vert Gain</div>
-  </div>
-  <div class="elev-item">
-    <div class="elev-val">7 hr</div>
-    <div class="elev-label">Cut-off</div>
-  </div>
-  <div class="elev-item">
-    <div class="elev-val">6,200′</div>
-    <div class="elev-label">Start Elev.</div>
-  </div>
-</div>
-
-<!-- NAV -->
+<!-- MAIN NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <button class="nav-tab active" onclick="switchTab('race', this)">🏁 Race Info</button>
-    <button class="nav-tab" onclick="switchTab('fuel', this)">⚡ Fuel & Salt</button>
-    <button class="nav-tab" onclick="switchTab('hotel', this)">🏨 Hotel</button>
+    <button class="nav-tab active" onclick="switchMain('heather', this)">🟡 Heather's Races</button>
+    <button class="nav-tab" onclick="switchMain('andrew', this)">🏁 Andrew's Race</button>
+    <button class="nav-tab" id="pack-tab-btn" onclick="switchMain('pack', this)">🎒 Pack List</button>
   </div>
 </nav>
 
-<!-- ════════════════════════════════════ TAB 1: RACE INFO ══ -->
-<div id="tab-race" class="tab-panel active">
+<!-- ════════════════════════════════════ HEATHER ══ -->
+<div id="main-heather" class="main-panel active">
+  <div class="sub-nav">
+    <div class="sub-nav-inner">
+      <button class="sub-tab active" onclick="switchSub('h-11k', this)">🟡 11K — Sat June 20</button>
+      <button class="sub-tab" onclick="switchSub('h-ironface', this)">⛏️ Iron Face — Fri June 19</button>
+    </div>
+  </div>
+
+  <!-- HEATHER: 11K -->
+  <div id="h-11k" class="sub-panel active">
+  <div class="content">
+
+    <div class="section">
+      <div class="section-label">Race At A Glance</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-key">Race Date</div>
+          <div class="card-val">Saturday, June 20</div>
+          <div class="card-note">8:00 AM gun start</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Flag Color</div>
+          <div class="card-val" style="color:#f0a500;">🟡 Yellow</div>
+          <div class="card-note">Follow yellow flags on course</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Start Location</div>
+          <div class="card-val">ACG Arch by Coffeebar</div>
+          <div class="card-note">Palisades Tahoe vendor village</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Cut-Off</div>
+          <div class="card-val">4 Hours</div>
+          <div class="card-note">From gun start</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Distance</div>
+          <div class="card-val">6.65 mi / 10.7 km</div>
+          <div class="card-note">1,950 ft vertical gain</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Drop Bags / Crew</div>
+          <div class="card-val">None</div>
+          <div class="card-note">Carry everything from the start</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">About the 11K</div>
+      <div class="section-body">The 11K is the community distance — built for every kind of runner. One honest climb, one big view, one ripping descent, and the same iconic finish bell as the elites. This is the gateway race to the longer Broken Arrow distances.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Aid Stations</div>
+      <div class="section-title">On-course fuel</div>
+      <div class="aid-list">
+        <div class="aid-row">
+          <div class="aid-dot"></div>
+          <div>
+            <div class="aid-name">Neversecond Gels (at all stations)</div>
+            <div class="aid-detail">Citrus · Passion Fruit · Unflavored · Berry (caffeinated, 75mg)</div>
+          </div>
+        </div>
+        <div class="aid-row">
+          <div class="aid-dot"></div>
+          <div>
+            <div class="aid-name">Tailwind Nutrition (at all stations)</div>
+            <div class="aid-detail">Naked · Dauwaltermelon + real food</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <a class="race-link" href="https://www.brokenarrowskyrace.com/11k" target="_blank">
+          <div class="race-link-icon">📍</div>
+          <div class="race-link-body">
+            <div class="race-link-title">11K Aid Station Details</div>
+            <div class="race-link-url">brokenarrowskyrace.com/11k</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">At The Finish</div>
+      <div class="section-title">Ring Das Bell 🔔</div>
+      <div class="checklist">
+        <div class="check-item">Free finish line feed station — open to all registered runners</div>
+        <div class="check-item">Catered meal from Men Wielding Fire — food voucher on your bib, redeemable any day of race weekend</div>
+        <div class="check-item">Drink voucher on bib — Alibi + Best Day Brewing at the finish line bar</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Key Links</div>
+      <div class="link-block">
+        <a class="race-link" href="https://www.brokenarrowskyrace.com/11k" target="_blank">
+          <div class="race-link-icon">🗺️</div>
+          <div class="race-link-body">
+            <div class="race-link-title">11K Course Map & Race Info</div>
+            <div class="race-link-url">brokenarrowskyrace.com/11k</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+        <a class="race-link" href="https://www.brokenarrowskyrace.com/schedule" target="_blank">
+          <div class="race-link-icon">📅</div>
+          <div class="race-link-body">
+            <div class="race-link-title">Full Weekend Schedule</div>
+            <div class="race-link-url">brokenarrowskyrace.com/schedule</div>
+          </div>
+          <div class="race-link-arrow">→</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Don't Forget</div>
+      <div class="checklist">
+        <div class="check-item">Pick up bib Thursday June 18, 10am–6pm (bring photo ID — no proxy pickup)</div>
+        <div class="check-item">No drop bags — carry everything from the start</div>
+        <div class="check-item">Follow <strong>yellow flags</strong> on course</div>
+        <div class="check-item">Cut-off is 4 hours from gun start</div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- HEATHER: IRON FACE -->
+  <div id="h-ironface" class="sub-panel">
+  <div class="content">
+
+    <div class="section">
+      <div class="alert" style="margin-top:24px;">
+        <strong>⚠️ MANDATORY PRE-RACE MEETING — Friday June 19 at 11:00 AM</strong><br>
+        Events Plaza Stage. Attendance is required before you can race. Do not miss this.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Race At A Glance</div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-key">Race Date</div>
+          <div class="card-val">Friday, June 19</div>
+          <div class="card-note">12:00 PM (Noon) start</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Flag Color</div>
+          <div class="card-val" style="color:#f0a500;">🟡 Yellow</div>
+          <div class="card-note">Follow yellow flags on course</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Start Location</div>
+          <div class="card-val">Western States Rock</div>
+          <div class="card-note">By the Aerial Tram building — not ACG Arch</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Cut-Off</div>
+          <div class="card-val">None</div>
+          <div class="card-note">No time limit</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Distance</div>
+          <div class="card-val">5 mi / 8 km</div>
+          <div class="card-note">1,670 ft vertical gain</div>
+        </div>
+        <div class="card">
+          <div class="card-key">Aid Stations</div>
+          <div class="card-val">None</div>
+          <div class="card-note">Fully self-supported — carry everything</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">About the Iron Face Challenge</div>
+      <div class="section-title">North America's first race of its kind</div>
+      <div class="section-body">Three disciplines combined into one adventure — equal parts runner and climber.</div>
+      <div class="aid-list">
+        <div class="aid-row">
+          <div class="aid-dot"></div>
+          <div>
+            <div class="aid-name">1. Steep Uphill Singletrack</div>
+            <div class="aid-detail">Technical climbing grind to the base of the face</div>
+          </div>
+        </div>
+        <div class="aid-row">
+          <div class="aid-dot"></div>
+          <div>
+            <div class="aid-name">2. True Via Ferrata Ascent</div>
+            <div class="aid-detail">Ascending the Tram Face using fixed iron rungs and cables — pseudo-rock-climbing</div>
+          </div>
+        </div>
+        <div class="aid-row">
+          <div class="aid-dot"></div>
+          <div>
+            <div class="aid-name">3. Screaming Downhill</div>
+            <div class="aid-detail">Ripping descent to the finish bell</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Self-Supported Nutrition</div>
+      <div class="section-title">Carry everything from the start</div>
+      <div class="section-body">No aid stations on course. Midday June start means heat — don't skip the salt.</div>
+      <div class="checklist">
+        <div class="check-item">2–3 gels or energy gummies</div>
+        <div class="check-item">Salt chews — especially important for a midday start in June heat</div>
+        <div class="check-item">Enough water to be self-sufficient for the full 5-mile effort</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">At The Finish</div>
+      <div class="section-title">Ring Das Bell 🔔</div>
+      <div class="checklist">
+        <div class="check-item">Free finish line feed station — open to all registered runners</div>
+        <div class="check-item">Drink voucher on bib — redeemable at the finish bar</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Don't Forget</div>
+      <div class="checklist">
+        <div class="check-item"><strong>Attend the 11am mandatory meeting</strong> Friday June 19 at Events Plaza stage — no exceptions</div>
+        <div class="check-item">Start is at <strong>Western States Rock by the Aerial Tram building</strong> — different from most race starts</div>
+        <div class="check-item">Carry all your own water and nutrition — zero aid on course</div>
+        <div class="check-item">Follow <strong>yellow flags</strong> on course</div>
+        <div class="check-item">No drop bags, no crew, no cut-off</div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+</div>
+
+<!-- ════════════════════════════════════ ANDREW ══ -->
+<div id="main-andrew" class="main-panel">
+  <div class="sub-nav">
+    <div class="sub-nav-inner">
+      <button class="sub-tab active" onclick="switchSub('a-race', this)">🏁 Race Info</button>
+      <button class="sub-tab" onclick="switchSub('a-fuel', this)">⚡ Fuel & Salt</button>
+      <button class="sub-tab" onclick="switchSub('a-hotel', this)">🏨 Hotel</button>
+    </div>
+  </div>
+
+  <!-- ANDREW: RACE INFO -->
+  <div id="a-race" class="sub-panel active">
+
+  <!-- ELEV STRIP -->
+  <div class="elev-strip">
+    <div class="elev-item">
+      <div class="elev-val">14.25</div>
+      <div class="elev-label">Miles</div>
+    </div>
+    <div class="elev-item">
+      <div class="elev-val">22.9</div>
+      <div class="elev-label">Kilometers</div>
+    </div>
+    <div class="elev-item">
+      <div class="elev-val">4,500′</div>
+      <div class="elev-label">Vert Gain</div>
+    </div>
+    <div class="elev-item">
+      <div class="elev-val">7 hr</div>
+      <div class="elev-label">Cut-off</div>
+    </div>
+    <div class="elev-item">
+      <div class="elev-val">6,200′</div>
+      <div class="elev-label">Start Elev.</div>
+    </div>
+  </div>
+
   <div class="content">
 
     <div class="section">
@@ -818,11 +1398,11 @@
       </div>
     </div>
 
-  </div>
-</div>
+  </div><!-- /a-race content -->
+  </div><!-- /a-race sub-panel -->
 
-<!-- ════════════════════════════════════ TAB 2: FUEL & SALT ══ -->
-<div id="tab-fuel" class="tab-panel">
+  <!-- ANDREW: FUEL & SALT -->
+  <div id="a-fuel" class="sub-panel">
   <div class="content">
 
     <div class="section">
@@ -981,11 +1561,11 @@
       </div>
     </div>
 
-  </div>
-</div>
+  </div><!-- /a-fuel content -->
+  </div><!-- /a-fuel sub-panel -->
 
-<!-- ════════════════════════════════════ TAB 3: HOTEL ══ -->
-<div id="tab-hotel" class="tab-panel">
+  <!-- ANDREW: HOTEL -->
+  <div id="a-hotel" class="sub-panel">
   <div class="content">
 
     <!-- HOTEL HEADER -->
@@ -1140,8 +1720,322 @@
       </div>
     </div>
 
+  </div><!-- /a-hotel content -->
+  </div><!-- /a-hotel sub-panel -->
+
+</div><!-- /main-andrew -->
+
+<!-- ════════════════════════════════════ PACK LIST ══ -->
+<div id="main-pack" class="main-panel">
+  <div class="sub-nav">
+    <div class="sub-nav-inner">
+      <button class="sub-tab active" onclick="switchSub('p-runners', this)">🏃 Runners</button>
+      <button class="sub-tab" onclick="switchSub('p-littles', this)">👶 Little Ones</button>
+      <button class="sub-tab" onclick="switchSub('p-bigkids', this)">🎒 Big Kids</button>
+      <button class="sub-tab" onclick="switchSub('p-basecamp', this)">⛺ Base Camp</button>
+    </div>
   </div>
-</div>
+
+  <!-- RUNNERS -->
+  <div id="p-runners" class="sub-panel active">
+  <div class="content">
+    <div class="section">
+      <div class="section-label">Packing Progress</div>
+      <div class="pack-progress">
+        <div class="pack-progress-text">Packed: <strong><span class="pack-progress-count">0 / 0</span></strong></div>
+        <div class="pack-progress-track"><div class="pack-progress-fill"></div></div>
+        <button class="pack-reset-btn" onclick="resetPack('p-runners')">Reset</button>
+        <button class="pack-print-btn" onclick="window.print()">Print</button>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">Andrew — 23K Race Gear</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span><strong>Running vest / hydration pack</strong><span class="pack-note">Must hold enough water to reach each aid station</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>2× soft flasks or water bottles (filled at start)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>8–12 salt chews (SaltStick or Precision Hydration)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>3–4 gels or 1 bag of energy gummies (personal stash)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>2–3 real food items<span class="pack-note">Medjool dates, salted chips, or PB&amp;J quarters</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Watch with interval timer set to 45 min</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Trail running shoes (broken in — nothing new race day)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Running hat or visor</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sunglasses</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sunscreen (apply before the start)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Extra layer for the summit<span class="pack-note">Wind shell or light fleece — summit is dramatically colder than 6,200ft village</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Anti-chafe balm (Body Glide or Squirrel's Nut Butter)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Blister pads / Leukotape (pre-taped trouble spots)</span></label>
+          <label class="pack-item"><input type="checkbox"><span><strong>Race bib</strong> — pick up Thursday June 18, 10am–6pm<span class="pack-note">Bring valid photo ID — no proxy pickup allowed</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Phone (charged) + event app downloaded (Endurance HQ)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Trekking poles (optional but helpful on 4,500ft climb)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Trail gaiters (optional — keeps rocks out on descents)</span></label>
+        </div>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">Heather — 11K Race Gear (Saturday, June 20)</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span>Trail running shoes (no new shoes race day)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Hydration vest or handheld</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Water (carry everything — no drop bags on 11K)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>1–2 gels or energy gummies</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Salt chews</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Hat or visor</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sunglasses</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sunscreen</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Extra layer (summit gets cold)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Anti-chafe balm</span></label>
+          <label class="pack-item"><input type="checkbox"><span><strong>Race bib</strong> (picked up Thursday)</span></label>
+        </div>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">Heather — Iron Face Challenge (Friday, June 19)</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span><strong>Attend mandatory 11am pre-race meeting</strong><span class="pack-note">Friday June 19 · Events Plaza Stage — cannot race without it</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span><strong>Note start location:</strong> Western States Rock by Aerial Tram — not ACG Arch</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Water: enough for fully self-supported 5 miles (no aid stations)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>2–3 gels or energy gummies</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Salt chews (midday June heat — do not skip salt)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Grippy gloves (optional — via ferrata uses iron rungs and cables)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Race bib</span></label>
+        </div>
+      </div>
+
+      <div class="alert">
+        <strong>Race morning checkout warning.</strong> Andrew's race starts at 8am+ and hotel checkout is 11am Sunday. Stage your bag the night before so you're not scrambling post-finish.
+      </div>
+      <div class="pack-box">
+        <div class="pack-category-label">Add Your Own</div>
+        <div class="pack-list pack-custom-list" id="custom-p-runners"></div>
+        <div class="pack-add-row">
+          <input class="pack-add-input" type="text" placeholder="Add an item…" id="input-p-runners" onkeydown="if(event.key==='Enter')addCustomItem('p-runners')">
+          <button class="pack-add-btn" onclick="addCustomItem('p-runners')">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- LITTLE ONES -->
+  <div id="p-littles" class="sub-panel">
+  <div class="content">
+    <div class="section">
+      <div class="section-label">Packing Progress</div>
+      <div class="pack-progress">
+        <div class="pack-progress-text">Packed: <strong><span class="pack-progress-count">0 / 0</span></strong></div>
+        <div class="pack-progress-track"><div class="pack-progress-fill"></div></div>
+        <button class="pack-reset-btn" onclick="resetPack('p-littles')">Reset</button>
+        <button class="pack-print-btn" onclick="window.print()">Print</button>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">Caleb (4) — Essentials</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span>Stroller or backpack carrier<span class="pack-note">Lots of walking around the village — a carrier is a lifesaver for a 4yr old</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sunscreen SPF 50 (kid-safe)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sun hat</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Warm layer / fleece<span class="pack-note">Mornings at 6,200ft are cold even in June</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>2–3 changes of clothes</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Comfortable walking shoes / sneakers</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Pull-ups / diapers + wipes (if still needed)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Familiar stuffed animal or comfort item</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Snacks (goldfish, pouches, granola bars, fruit)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sippy cup / water bottle</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Tablet loaded with shows and games</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Kid-sized headphones</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Small toys / activity pack<span class="pack-note">Sticker books, small figurines — waiting at finish lines is a long game</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Swimsuit (hotel has 8 hot tubs — kids will love it)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Nightlight or white noise app for hotel room</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Any medications or allergy meds</span></label>
+        </div>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">Archer (6) — Heather's Son</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span>Sunscreen SPF 50 (kid-safe)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sun hat</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Warm layer for cold mornings</span></label>
+          <label class="pack-item"><input type="checkbox"><span>2–3 changes of clothes</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Comfortable walking shoes / sneakers</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Snacks (plenty — spectating takes hours)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Water bottle</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Tablet or device with downloaded content</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Kid-sized headphones</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Small toys / activities for waiting</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Swimsuit (hotel hot tubs)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Comfort item for overnight (if needed)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Any medications or allergy meds</span></label>
+        </div>
+      </div>
+
+      <div class="alert green">
+        <strong>Hotel perk for the little ones:</strong> The Village has a dedicated children's room, a media room with Xbox, pool table, and foosball. Keep that in your back pocket when they get restless.
+      </div>
+      <div class="pack-box">
+        <div class="pack-category-label">Add Your Own</div>
+        <div class="pack-list pack-custom-list" id="custom-p-littles"></div>
+        <div class="pack-add-row">
+          <input class="pack-add-input" type="text" placeholder="Add an item…" id="input-p-littles" onkeydown="if(event.key==='Enter')addCustomItem('p-littles')">
+          <button class="pack-add-btn" onclick="addCustomItem('p-littles')">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- BIG KIDS -->
+  <div id="p-bigkids" class="sub-panel">
+  <div class="content">
+    <div class="section">
+      <div class="section-label">Packing Progress</div>
+      <div class="pack-progress">
+        <div class="pack-progress-text">Packed: <strong><span class="pack-progress-count">0 / 0</span></strong></div>
+        <div class="pack-progress-track"><div class="pack-progress-fill"></div></div>
+        <button class="pack-reset-btn" onclick="resetPack('p-bigkids')">Reset</button>
+        <button class="pack-print-btn" onclick="window.print()">Print</button>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">Willow (13)</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span>Warm layer / light jacket<span class="pack-note">Cold mornings at 6,200ft altitude — even in June</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Good walking shoes / sneakers (lots of walking the vendor village)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sunscreen</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sunglasses</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Hat or cap</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Personal day bag / backpack</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Water bottle</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Snacks in her bag</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Phone (charged) + charger</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Headphones</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Cash / spending money for vendor village</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Book, journal, or something for downtime</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Swimsuit (hotel hot tubs)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>2–3 changes of clothes</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Toiletries</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Any medications</span></label>
+        </div>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">David (11)</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span>Warm layer / light jacket</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Good walking shoes / sneakers</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sunscreen</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Sunglasses</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Hat or cap</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Day bag or small pack</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Water bottle</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Snacks for his bag</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Device (phone / tablet) + charger</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Headphones</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Cash / spending money</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Games, cards, or handheld entertainment</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Swimsuit (hotel hot tubs + media room)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>2–3 changes of clothes</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Any medications</span></label>
+        </div>
+      </div>
+
+      <div class="alert blue">
+        <strong>Cowbell moment:</strong> The concierge tent hands out free cowbells (limited, daily supply). Give one to Willow and David to ring at the finish line — it's a memory they'll keep.
+      </div>
+      <div class="pack-box">
+        <div class="pack-category-label">Add Your Own</div>
+        <div class="pack-list pack-custom-list" id="custom-p-bigkids"></div>
+        <div class="pack-add-row">
+          <input class="pack-add-input" type="text" placeholder="Add an item…" id="input-p-bigkids" onkeydown="if(event.key==='Enter')addCustomItem('p-bigkids')">
+          <button class="pack-add-btn" onclick="addCustomItem('p-bigkids')">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- BASE CAMP -->
+  <div id="p-basecamp" class="sub-panel">
+  <div class="content">
+    <div class="section">
+      <div class="section-label">Packing Progress</div>
+      <div class="pack-progress">
+        <div class="pack-progress-text">Packed: <strong><span class="pack-progress-count">0 / 0</span></strong></div>
+        <div class="pack-progress-track"><div class="pack-progress-fill"></div></div>
+        <button class="pack-reset-btn" onclick="resetPack('p-basecamp')">Reset</button>
+        <button class="pack-print-btn" onclick="window.print()">Print</button>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">Spectator &amp; Finish Line Gear</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span>Folding camp chairs (2+)<span class="pack-note">You'll be waiting at the finish line for hours — do not skip this</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Blankets / stadium blankets<span class="pack-note">Morning temps in the 40s at altitude — blankets at the finish line are everything</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Portable shade (travel umbrella or small pop-up)<span class="pack-note">Afternoon sun at altitude is intense</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Cowbell — get one free from the concierge tent (limited daily supply)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Portable phone charger / power bank<span class="pack-note">Critical for a full day of live tracking on the event app</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Event app installed on everyone's phone (Endurance HQ)<span class="pack-note">Live maps and tracking for both Andrew and Heather</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Binoculars (optional — great for spotting runners on the ridgeline)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Agreed finish-line meeting spot for the whole crew</span></label>
+        </div>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">Food &amp; Drinks — Crew &amp; Kids</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span>Breakfast for race mornings in the hotel room<span class="pack-note">Races start early — no time to hunt for food at 6am with 4 kids</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Coffee + travel thermos<span class="pack-note">Hotel provides in-room coffee — bring a thermos to carry to the finish line</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Finish line snack bag (for waiting kids)<span class="pack-note">Granola bars, fruit pouches, crackers — plan for 3–5 hours of waiting</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Extra water / drinks for the spectating crew</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Post-race meal plan<span class="pack-note">Both runners have a catered meal voucher + drink ticket on their bibs (Men Wielding Fire)</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Reusable bag for hauling food and supplies</span></label>
+        </div>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">First Aid &amp; Health</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span>Sunscreen SPF 50+ for the whole family<span class="pack-note">Altitude sunburn is brutal and fast — apply on everyone before leaving the hotel</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Lip balm with SPF</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Children's pain reliever (ibuprofen + acetaminophen)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Allergy medications (if anyone needs them)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Band-aids (assorted sizes)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Blister pads for runners' post-race feet</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Hand sanitizer</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Bug spray (dusk/evening at the village)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Any prescription medications</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Health insurance cards</span></label>
+        </div>
+      </div>
+
+      <div class="pack-box">
+        <div class="pack-category-label">Hotel &amp; Admin</div>
+        <div class="pack-list">
+          <label class="pack-item"><input type="checkbox"><span>Photo IDs for both runners (bib pickup — mandatory, no proxy)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Hotel confirmation<span class="pack-note">The Village at Palisades Tahoe · 1750 Village East Rd · Check-in from 4pm Fri June 19</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Download the Village app (speeds up check-in, room-ready notifications)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Parking plan sorted<span class="pack-note">1 vehicle free underground · 2nd vehicle $35/night · No overnight surface lot parking</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Phone chargers for all devices</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Toiletries for the whole group</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Swimsuits × everyone (8 hot tubs + 4 saunas — major post-race recovery)</span></label>
+          <label class="pack-item"><input type="checkbox"><span>Laundry bag (race clothes will be destroyed — contain the damage)</span></label>
+          <label class="pack-item"><input type="checkbox"><span><strong>Pack bags the night before checkout</strong><span class="pack-note">Checkout 11am Sunday = same morning as the 23K. Do not leave this for race morning.</span></span></label>
+          <label class="pack-item"><input type="checkbox"><span>Emergency contact list (in case group gets separated at the venue)</span></label>
+        </div>
+      </div>
+      <div class="pack-box">
+        <div class="pack-category-label">Add Your Own</div>
+        <div class="pack-list pack-custom-list" id="custom-p-basecamp"></div>
+        <div class="pack-add-row">
+          <input class="pack-add-input" type="text" placeholder="Add an item…" id="input-p-basecamp" onkeydown="if(event.key==='Enter')addCustomItem('p-basecamp')">
+          <button class="pack-add-btn" onclick="addCustomItem('p-basecamp')">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</div><!-- /main-pack -->
 
 <div class="footer">
   Built from your Broken Arrow confirmation email &nbsp;·&nbsp;
@@ -1150,13 +2044,132 @@
 </div>
 
 <script>
-  function switchTab(name, el) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  function switchMain(name, el) {
+    document.querySelectorAll('.main-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
+    document.getElementById('main-' + name).classList.add('active');
     el.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+  function switchSub(id, el) {
+    const parent = el.closest('.main-panel');
+    parent.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+    parent.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── PACK LIST ──
+  const PACK_PANELS = ['p-runners', 'p-littles', 'p-bigkids', 'p-basecamp'];
+
+  function updateProgress(panelId) {
+    const panel = document.getElementById(panelId);
+    if (!panel) return;
+    const total = panel.querySelectorAll('.pack-item').length;
+    const checked = panel.querySelectorAll('.pack-item input:checked').length;
+    const pct = total ? (checked / total * 100) : 0;
+    const fill = panel.querySelector('.pack-progress-fill');
+    const count = panel.querySelector('.pack-progress-count');
+    if (fill) fill.style.width = pct + '%';
+    if (count) count.textContent = checked + ' / ' + total;
+    updatePackBadge();
+  }
+
+  function updatePackBadge() {
+    const allItems = document.querySelectorAll('#main-pack .pack-item');
+    const total = allItems.length;
+    const checked = document.querySelectorAll('#main-pack .pack-item input:checked').length;
+    const btn = document.getElementById('pack-tab-btn');
+    if (btn) btn.textContent = '🎒 Pack List (' + checked + '/' + total + ')';
+  }
+
+  function saveCustom(panelId) {
+    const list = document.getElementById('custom-' + panelId);
+    if (!list) return;
+    const items = Array.from(list.querySelectorAll('.pack-item')).map(function(el) {
+      return { text: el.querySelector('span').textContent, checked: el.querySelector('input').checked };
+    });
+    localStorage.setItem('pack-custom-' + panelId, JSON.stringify(items));
+  }
+
+  function addCustomItem(panelId, text, checked) {
+    const input = document.getElementById('input-' + panelId);
+    const list = document.getElementById('custom-' + panelId);
+    if (!list) return;
+    const itemText = text !== undefined ? text : (input ? input.value.trim() : '');
+    if (!itemText) return;
+
+    const el = document.createElement('label');
+    el.className = 'pack-item custom' + (checked ? ' is-checked' : '');
+    el.innerHTML = '<input type="checkbox"' + (checked ? ' checked' : '') + '><span>' + itemText + '</span><button class="pack-remove" type="button">✕</button>';
+
+    el.querySelector('input').addEventListener('change', function(e) {
+      el.classList.toggle('is-checked', e.target.checked);
+      saveCustom(panelId);
+      updateProgress(panelId);
+    });
+    el.querySelector('.pack-remove').addEventListener('click', function(e) {
+      e.preventDefault();
+      el.remove();
+      saveCustom(panelId);
+      updateProgress(panelId);
+    });
+
+    list.appendChild(el);
+    if (input) input.value = '';
+    saveCustom(panelId);
+    updateProgress(panelId);
+  }
+
+  function resetPack(panelId) {
+    const panel = document.getElementById(panelId);
+    if (!panel) return;
+    panel.querySelectorAll('.pack-item:not(.custom) input').forEach(function(cb, i) {
+      cb.checked = false;
+      cb.closest('.pack-item').classList.remove('is-checked');
+      localStorage.removeItem('pack-' + panelId + '-' + i);
+    });
+    const customList = document.getElementById('custom-' + panelId);
+    if (customList) customList.innerHTML = '';
+    localStorage.removeItem('pack-custom-' + panelId);
+    updateProgress(panelId);
+  }
+
+  function initPackList() {
+    PACK_PANELS.forEach(function(panelId) {
+      const panel = document.getElementById(panelId);
+      if (!panel) return;
+
+      // Restore built-in checkboxes
+      panel.querySelectorAll('.pack-item:not(.custom)').forEach(function(item, i) {
+        const cb = item.querySelector('input[type="checkbox"]');
+        if (!cb) return;
+        const key = 'pack-' + panelId + '-' + i;
+        if (localStorage.getItem(key) === 'true') {
+          cb.checked = true;
+          item.classList.add('is-checked');
+        }
+        cb.addEventListener('change', function() {
+          localStorage.setItem(key, cb.checked);
+          item.classList.toggle('is-checked', cb.checked);
+          updateProgress(panelId);
+        });
+      });
+
+      // Restore custom items
+      const saved = localStorage.getItem('pack-custom-' + panelId);
+      if (saved) {
+        JSON.parse(saved).forEach(function(c) {
+          addCustomItem(panelId, c.text, c.checked);
+        });
+      }
+
+      updateProgress(panelId);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initPackList);
 </script>
 
 </body>
